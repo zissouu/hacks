@@ -64,8 +64,11 @@ namespace hackz.Game
         private void RunMission(HackzMission mission)
         {
             Console.Clear();
-            PrintSlow($"[MISSION {mission.Id}] {mission.Title}\n", 20);
-            PrintSlow($"{mission.Description}\n\n", 15);
+            Utils.MatrixEffect(6, 25);
+            Utils.GlitchEffect($"[MISSION {mission.Id}] {mission.Title}", 4, 30);
+            Utils.TypeLine($"{mission.Description}\n", 15);
+            Utils.PrintRandomSystemAlert();
+            Console.WriteLine();
 
             for (int i = 0; i < mission.Choices.Count; i++)
             {
@@ -92,15 +95,18 @@ namespace hackz.Game
 
         private void AttemptChoice(HackzMission mission, HackzMissionChoice choice)
         {
-            Console.WriteLine("\nRunning exploit...");
-            Thread.Sleep(1000);
+            Utils.TypeLine("\nRunning exploit...", 20);
+            Thread.Sleep(400);
+
+            // Run dynamic ASCII hacking animation
+            Utils.RunHackingAnimation(1500, 50);
 
             bool success = _rng.NextDouble() < choice.SuccessChance;
 
             if (success)
-                PrintSlow($"\nSUCCESS: {choice.SuccessText}\n", 15);
+                Utils.TypeLine($"\nSUCCESS: {choice.SuccessText}\n", 15);
             else
-                PrintSlow($"\nFAILURE: {choice.FailText}\n", 15);
+                Utils.TypeLine($"\nFAILURE: {choice.FailText}\n", 15);
 
             if (mission.NextMissionId != null)
             {
@@ -120,19 +126,11 @@ namespace hackz.Game
             }
             else
             {
-                PrintSlow("\n*** MISSION COMPLETE ***\n\nYou’ve reached the end of the current storyline.\n", 20);
+                Utils.TypeLine("\n*** MISSION COMPLETE ***\nYou’ve reached the end of the current storyline.\n", 20);
+                Utils.PrintRandomJoke();
                 Console.WriteLine("Press Enter to return to the terminal...");
                 Console.ReadLine();
                 Console.Clear();
-            }
-        }
-
-        private void PrintSlow(string text, int delayMs = 25)
-        {
-            foreach (char c in text)
-            {
-                Console.Write(c);
-                Thread.Sleep(delayMs);
             }
         }
     }
