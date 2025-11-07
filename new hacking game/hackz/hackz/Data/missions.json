@@ -1,41 +1,62 @@
 [
   {
-    "Id": 1,
-    "Title": "Steal the Donut Recipe",
-    "Description": "Your first mission: infiltrate the corporate bakery server and grab their secret donut recipe.",
-    "Choices": [
-      {
-        "Option": "Use social engineering to trick the admin.",
-        "SuccessChance": 0.7,
-        "SuccessText": "You successfully tricked the admin and got the recipe!",
-        "FailText": "The admin caught on. Mission failed."
-      },
-      {
-        "Option": "Brute force the server password.",
-        "SuccessChance": 0.4,
-        "SuccessText": "You cracked the password! Recipe acquired.",
-        "FailText": "Too many attempts! You triggered an alert."
-      }
+    "id": 1,
+    "title": "Access Denied? Not Today.",
+    "description": "Your first test: bypass a local coffee shop's Wi-Fi firewall to unlock free refills. The system runs on an outdated router named 'LatteLink3000'.",
+    "objectives": [
+      "Scan the network for open ports.",
+      "Exploit the weak WPS configuration.",
+      "Redirect traffic through your proxy tunnel."
     ],
-    "NextMissionId": 2
+    "reward": 100,
+    "difficulty": "Easy"
   },
   {
-    "Id": 2,
-    "Title": "Leak Corporate Secrets",
-    "Description": "Time to cause some chaos. Expose the most absurd secrets of MegaCorp.",
-    "Choices": [
-      {
-        "Option": "Upload files to HackzNet forum.",
-        "SuccessChance": 0.8,
-        "SuccessText": "Secrets leaked successfully. Internet is entertained.",
-        "FailText": "Upload failed! Network detected your IP."
-      },
-      {
-        "Option": "Send email to CEO with attachments.",
-        "SuccessChance": 0.5,
-        "SuccessText": "CEO panicked and resigned. Chaos achieved!",
-        "FailText": "Email bounced. Security is watching."
-      }
-    ]
+    "id": 2,
+    "title": "Corporate Espress-o",
+    "description": "A suspicious coffee chain is collecting customer data. Time to blend in and extract their private bean database.",
+    "objectives": [
+      "Intercept packets from the loyalty card app.",
+      "Decrypt the Base64-encoded passwords (because of course they used Base64).",
+      "Upload the evidence to your hidden drive."
+    ],
+    "reward": 250,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 3,
+    "title": "The Intern Firewall",
+    "description": "A rival hacker’s intern accidentally set up a firewall rule that blocks all outbound traffic — including his own. Help him out... or don’t.",
+    "objectives": [
+      "Log into the remote server via SSH.",
+      "Find and fix the broken iptables rule.",
+      "Install a small 'bonus' backdoor for later use."
+    ],
+    "reward": 400,
+    "difficulty": "Medium"
+  },
+  {
+    "id": 4,
+    "title": "Ghost in the Mainframe",
+    "description": "A university AI project has gone rogue. The researchers think it's 'self-learning' — you think it’s just badly commented code. Shut it down before it goes viral.",
+    "objectives": [
+      "Bypass the student VPN.",
+      "Inject a logic bomb into the AI training loop.",
+      "Trigger the shutdown sequence using the password hint: 'the cake is a lie'."
+    ],
+    "reward": 700,
+    "difficulty": "Hard"
+  },
+  {
+    "id": 5,
+    "title": "Hack the Planet (Final Mission)",
+    "description": "It’s time. The government’s Quantum Encryption Division has gone too far. You and your crew are about to pull off the biggest digital heist in history.",
+    "objectives": [
+      "Run global ping sweeps from your custom botnet.",
+      "Spoof your identity through at least 7 countries.",
+      "Upload the final payload: 'Project Rainmaker'."
+    ],
+    "reward": 1500,
+    "difficulty": "Extreme"
   }
 ]

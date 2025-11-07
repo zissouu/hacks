@@ -1,103 +1,142 @@
+// hackz/hackz/game/Utils.cs
 using System;
+using System.Text;
 using System.Threading;
 
 namespace hackz.Game
 {
     public static class Utils
     {
-        // Typewriter effect for text output
-        public static void TypeText(string text, int delay = 25, bool newline = true)
+        private static readonly Random _rand = new();
+
+        // Print text like a typewriter. Matches calls: Utils.TypeLine(text, delayMs)
+        public static void TypeLine(string text, int delayMs = 15)
         {
             foreach (char c in text)
             {
                 Console.Write(c);
-                Thread.Sleep(delay);
+                Thread.Sleep(delayMs);
             }
-            if (newline) Console.WriteLine();
+            Console.WriteLine();
         }
 
-        // Simulate a loading bar
-        public static void LoadingBar(string message, int duration = 1500)
+        // Matrix-style effect. Matches calls: Utils.MatrixEffect(lines, delayMs)
+        public static void MatrixEffect(int lines = 10, int delayMs = 50)
         {
-            Console.Write(message);
-            for (int i = 0; i < 5; i++)
-            {
-                Thread.Sleep(duration / 5);
-                Console.Write(".");
-            }
-            Console.WriteLine(" done!");
-        }
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+            int width;
+            try { width = Console.WindowWidth; }
+            catch { width = 80; }
 
-        // ASCII logo intro
-        public static void AsciiIntro()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(@"
-██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗
-██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝
-███████║███████║██║     █████╔╝ ███████╗
-██╔══██║██╔══██║██║     ██╔═██╗ ╚════██║
-██║  ██║██║  ██║╚██████╗██║  ██╗███████║
-╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝
-");
-            Console.ResetColor();
-            Thread.Sleep(1000);
-        }
-
-        // Simulate 90s modem dial-up and connection boot (no sound)
-        public static void ModemConnect()
-        {
+            ConsoleColor origColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            TypeText("Initializing 56k modem driver...", 30);
-            Thread.Sleep(500);
 
-            TypeText("Dialing BBS: DARKNET_404", 40);
-            LoadingBar("", 2000);
-
-            TypeText("Authenticating handshake...");
-            Thread.Sleep(1000);
-            GlitchFlicker("ACCESS GRANTED");
-            Console.ResetColor();
-        }
-
-        // Glitch flicker animation
-        public static void GlitchFlicker(string message, int flickers = 6)
-        {
-            for (int i = 0; i < flickers; i++)
+            for (int i = 0; i < lines; i++)
             {
-                Console.ForegroundColor = (i % 2 == 0) ? ConsoleColor.Green : ConsoleColor.DarkGreen;
-                Console.WriteLine(message);
-                Thread.Sleep(70);
-                Console.Clear();
+                var line = new char[width];
+                for (int j = 0; j < width; j++)
+                    line[j] = chars[_rand.Next(chars.Length)];
+
+                Console.WriteLine(new string(line));
+                Thread.Sleep(delayMs);
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(message);
-            Console.ResetColor();
+
+            Console.ForegroundColor = origColor;
         }
 
-        // Fake diagnostics scroll
-        public static void BootDiagnostics()
+        // Glitch effect. Matches calls: Utils.GlitchEffect(message, glitchCount, delayMs)
+        public static void GlitchEffect(string message, int glitchCount = 3, int delayMs = 100)
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            string[] lines = new string[]
+            string chars = "!@#$%^&*<>?/\\|~";
+            int origLeft = 0;
+            int origTop = 0;
+            try
             {
-                "[SYS] BIOS version 2.04.3 loaded",
-                "[RAM] 32MB memory verified",
-                "[NET] Ethernet adapter detected",
-                "[NET] IP assigned: 192.168.13.37",
-                "[SEC] Firewall bypass module: OK",
-                "[SYS] Launching hackz OS kernel..."
+                origLeft = Console.CursorLeft;
+                origTop = Console.CursorTop;
+            }
+            catch { /* some terminals may not support cursor queries */ }
+
+            for (int i = 0; i < glitchCount; i++)
+            {
+                var sb = new StringBuilder(message);
+                int swaps = Math.Max(1, message.Length / 6);
+                for (int s = 0; s < swaps; s++)
+                {
+                    int pos = _rand.Next(0, message.Length);
+                    sb[pos] = chars[_rand.Next(chars.Length)];
+                }
+
+                Console.WriteLine(sb.ToString());
+                Thread.Sleep(delayMs);
+
+                try
+                {
+                    if (Console.CursorTop > 0) Console.SetCursorPosition(0, Console.CursorTop - 1);
+                }
+                catch { /* ignore */ }
+            }
+
+            Console.WriteLine(message); // final clean line
+        }
+
+        // Print a random fake system alert. Matches calls: Utils.PrintRandomSystemAlert()
+        public static void PrintRandomSystemAlert()
+        {
+            string[] alerts =
+            {
+                "SYSTEM OVERLOAD WARNING",
+                "Segmentation fault in your coffee machine driver",
+                "CPU usage at 9000%... just kidding",
+                "Unauthorized cat detected on network",
+                "[!] Tracing route back to source..."
             };
 
-            foreach (string line in lines)
-            {
-                TypeText(line, 30);
-                Thread.Sleep(150);
-            }
+            TypeLine(alerts[_rand.Next(alerts.Length)], 20);
+        }
 
-            Console.ResetColor();
-            Thread.Sleep(700);
-            Console.Clear();
+        // Hacking progress animation. Matches calls: Utils.RunHackingAnimation(durationMs, speed)
+        public static void RunHackingAnimation(int durationMs = 1500, int speed = 50)
+        {
+            string[] frames = new string[]
+            {
+                "[=         ]",
+                "[==        ]",
+                "[===       ]",
+                "[====      ]",
+                "[=====     ]",
+                "[======    ]",
+                "[=======   ]",
+                "[========  ]",
+                "[========= ]",
+                "[==========]"
+            };
+
+            int start = Environment.TickCount;
+            while (Environment.TickCount - start < durationMs)
+            {
+                foreach (var frame in frames)
+                {
+                    Console.Write($"\r{frame}");
+                    Thread.Sleep(speed);
+                }
+            }
+            Console.WriteLine("\r[==========] Done!");
+        }
+
+        // Random hacker jokes. Matches calls: Utils.PrintRandomJoke()
+        public static void PrintRandomJoke()
+        {
+            string[] jokes =
+            {
+                "Warning: Admin_404 is watching you sip your coffee.",
+                "Tip: Brute force is only effective if you actually know the password.",
+                "Reminder: Digital donuts contain zero calories. You’re welcome.",
+                "System Alert: The office cat has gained root access again.",
+                "404 Humor Not Found – but your mission is ready."
+            };
+
+            TypeLine(jokes[_rand.Next(jokes.Length)], 15);
         }
     }
 }

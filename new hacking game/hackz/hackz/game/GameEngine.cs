@@ -11,11 +11,9 @@ namespace hackz.Game
 
         public GameEngine()
         {
-            // Initialize the mission manager and load missions
             _missionManager = new MissionManager();
             _missionManager.LoadMissions("Data/missions.json");
 
-            // Initialize the command parser
             _parser = new CommandParser(_missionManager);
         }
 
@@ -24,31 +22,33 @@ namespace hackz.Game
             Console.Clear();
             PrintIntro();
 
-            // Main command loop
+            // Start missions after intro
+            _missionManager.StartMissions();
+
             while (true)
             {
                 Console.Write("\n> ");
                 string input = Console.ReadLine()?.Trim() ?? "";
-                _parser.Parse(input); // Use Parse() instead of Execute()
+                _parser.Parse(input);
             }
         }
 
         private void PrintIntro()
         {
-            Console.WriteLine("ACCESS GRANTED");
+            Utils.MatrixEffect(8, 30);
+            Thread.Sleep(200);
+            Utils.GlitchEffect("HACKZNET v3.7", 5, 30);
+            Thread.Sleep(200);
+            Utils.PrintRandomSystemAlert();
+            Thread.Sleep(200);
+            Utils.TypeLine("\n*** WELCOME TO HACKZNET ***", 25);
+            Utils.TypeLine("You’re an intern at the world’s most chaotic hacktivist collective.", 20);
+            Utils.TypeLine("Admin_404 has a series of missions for you.", 20);
+            Utils.TypeLine("Your job? Leak corporate secrets, steal digital donuts, and expose absurdity.", 20);
             Thread.Sleep(400);
-            Console.WriteLine("Connection established.");
-            Thread.Sleep(500);
-
-            Console.WriteLine("\n*** WELCOME TO HACKZNET ***");
+            Utils.PrintRandomJoke();
             Thread.Sleep(400);
-            Console.WriteLine("You’re an intern at the world’s most chaotic hacktivist collective.");
-            Thread.Sleep(400);
-            Console.WriteLine("Admin_404 has a series of missions for you.");
-            Thread.Sleep(400);
-            Console.WriteLine("Your job? Leak corporate secrets, steal digital donuts, and expose absurdity.");
-            Thread.Sleep(600);
-            Console.WriteLine("\nType 'help' to see available commands.");
+            Utils.TypeLine("\nType 'help' to see available commands.", 15);
         }
     }
 }

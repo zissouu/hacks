@@ -12,7 +12,8 @@ namespace hackz.Game
         public string Title { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public List<HackzMissionChoice> Choices { get; set; } = new();
-        public int? NextMissionId { get; set; }
+        public int? NextMissionOnSuccess { get; set; }
+        public int? NextMissionOnFailure { get; set; }
     }
 
     public class HackzMissionChoice
@@ -108,12 +109,15 @@ namespace hackz.Game
             else
                 Utils.TypeLine($"\nFAILURE: {choice.FailText}\n", 15);
 
-            if (mission.NextMissionId != null)
+            // Determine next mission based on success/failure
+            int? nextId = success ? mission.NextMissionOnSuccess : mission.NextMissionOnFailure;
+
+            if (nextId != null)
             {
                 Console.WriteLine("\nPress Enter to continue...");
                 Console.ReadLine();
 
-                var nextMission = _missions.Find(m => m.Id == mission.NextMissionId);
+                var nextMission = _missions.Find(m => m.Id == nextId);
                 if (nextMission != null)
                 {
                     _currentMission = nextMission;
@@ -121,12 +125,13 @@ namespace hackz.Game
                 }
                 else
                 {
-                    Console.WriteLine("Next mission not found.");
+                    Utils.TypeLine("Next mission not found. Returning to terminal...", 20);
+                    Console.ReadLine();
                 }
             }
             else
             {
-                Utils.TypeLine("\n*** MISSION COMPLETE ***\nYou’ve reached the end of the current storyline.\n", 20);
+                Utils.TypeLine("\n*** MISSION COMPLETE ***\nYou’ve reached the end of this storyline.\n", 20);
                 Utils.PrintRandomJoke();
                 Console.WriteLine("Press Enter to return to the terminal...");
                 Console.ReadLine();
