@@ -1,0 +1,41 @@
+[
+  {
+    "Id": 1,
+    "Title": "Steal the Donut Recipe",
+    "Description": "Your first mission: infiltrate the corporate bakery server and grab their secret donut recipe.",
+    "Choices": [
+      {
+        "Option": "Use social engineering to trick the admin.",
+        "SuccessChance": 0.7,
+        "SuccessText": "You successfully tricked the admin and got the recipe!",
+        "FailText": "The admin caught on. Mission failed."
+      },
+      {
+        "Option": "Brute force the server password.",
+        "SuccessChance": 0.4,
+        "SuccessText": "You cracked the password! Recipe acquired.",
+        "FailText": "Too many attempts! You triggered an alert."
+      }
+    ],
+    "NextMissionId": 2
+  },
+  {
+    "Id": 2,
+    "Title": "Leak Corporate Secrets",
+    "Description": "Time to cause some chaos. Expose the most absurd secrets of MegaCorp.",
+    "Choices": [
+      {
+        "Option": "Upload files to HackzNet forum.",
+        "SuccessChance": 0.8,
+        "SuccessText": "Secrets leaked successfully. Internet is entertained.",
+        "FailText": "Upload failed! Network detected your IP."
+      },
+      {
+        "Option": "Send email to CEO with attachments.",
+        "SuccessChance": 0.5,
+        "SuccessText": "CEO panicked and resigned. Chaos achieved!",
+        "FailText": "Email bounced. Security is watching."
+      }
+    ]
+  }
+]

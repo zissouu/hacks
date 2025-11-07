@@ -1,0 +1,14 @@
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/bin/Debug/net9.0/hackz
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/bin/Debug/net9.0/hackz.deps.json
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/bin/Debug/net9.0/hackz.runtimeconfig.json
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/bin/Debug/net9.0/hackz.dll
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/bin/Debug/net9.0/hackz.pdb
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.GeneratedMSBuildEditorConfig.editorconfig
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.AssemblyInfoInputs.cache
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.AssemblyInfo.cs
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.csproj.CoreCompileInputs.cache
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.dll
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/refint/hackz.dll
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.pdb
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/hackz.genruntimeconfig.cache
+/Users/szyartojeffrey/Desktop/new hacking game/hackz/hackz/obj/Debug/net9.0/ref/hackz.dll
